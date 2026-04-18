@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>وقف رقمي — Pitch Deck الاستثماري</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --emerald: #1B6B47;
+  --emerald-light: #2D9B6A;
+  --emerald-glow: rgba(27,107,71,0.35);
+  --emerald-pale: rgba(27,107,71,0.08);
+  --gold: #C8A96E;
+  --gold-light: #E8C98A;
+  --gold-glow: rgba(200,169,110,0.3);
+  --cream: #FAF6EE;
+  --cream2: #F2EBD9;
+  --cream3: #E8DEC8;
+  --ink: #1A1410;
+  --ink2: #2D2318;
+  --ink3: #3D3020;
+  --text-warm: #5C4A30;
+  --text-dim: #8C7A60;
+  --red-accent: #C44B2B;
+  --blue-accent: #2B5EA7;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* Islamic geometric pattern SVG background */
+.geo-bg {
+  position: absolute; inset: 0; z-index: 0; opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40Z' fill='none' stroke='%231B6B47' stroke-width='1'/%3E%3Cpath d='M40 10 L70 40 L40 70 L10 40Z' fill='none' stroke='%231B6B47' stroke-width='0.5'/%3E%3Ccircle cx='40' cy='40' r='8' fill='none' stroke='%231B6B47' stroke-width='0.5'/%3E%3C/svg%3E");
+  background-size: 80px 80px;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  background: rgba(250,246,238,0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 2px solid var(--emerald);
+  padding: 14px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand { display: flex; align-items: center; gap: 12px; }
+.nav-logo-ar {
+  font-family: 'Amiri', serif;
+  font-size: 1.6rem; font-weight: 700;
+  color: var(--emerald);
+}
+.nav-logo-en { font-size: 0.7rem; color: var(--text-dim); letter-spacing: 3px; text-transform: uppercase; }
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a {
+  color: var(--text-warm); text-decoration: none;
+  font-size: 0.82rem; font-weight: 700;
+  padding: 6px 14px; border-radius: 100px;
+  transition: all 0.25s;
+}
+.nav-links a:hover { background: var(--emerald); color: var(--cream); }
+
+/* ===== SECTIONS ===== */
+section {
+  min-height: 100vh;
+  padding: 130px 64px 90px;
+  position: relative; overflow: hidden;
+}
+section:nth-child(even) { background: var(--cream2); }
+
+/* ===== HERO ===== */
+#hero {
+  background: var(--ink);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+}
+.hero-geo {
+  position: absolute; inset: 0; z-index: 0; opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath d='M60 5 L115 35 L115 85 L60 115 L5 85 L5 35Z' fill='none' stroke='%23C8A96E' stroke-width='1'/%3E%3Cpath d='M60 20 L100 42 L100 78 L60 100 L20 78 L20 42Z' fill='none' stroke='%231B6B47' stroke-width='0.8'/%3E%3Cpath d='M60 35 L85 50 L85 70 L60 85 L35 70 L35 50Z' fill='none' stroke='%23C8A96E' stroke-width='0.5'/%3E%3Ccircle cx='60' cy='60' r='10' fill='none' stroke='%23C8A96E' stroke-width='0.5'/%3E%3C/svg%3E");
+  background-size: 120px 120px;
+}
+.hero-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(27,107,71,0.15) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  z-index: 0;
+}
+.hero-content { position: relative; z-index: 1; }
+
+.hero-ayah {
+  font-family: 'Amiri', serif;
+  font-size: 1.1rem;
+  color: var(--gold);
+  opacity: 0.8;
+  margin-bottom: 28px;
+  letter-spacing: 1px;
+  animation: fadeUp 0.7s ease forwards;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--gold);
+  color: var(--gold); padding: 7px 22px;
+  border-radius: 100px; font-size: 0.72rem;
+  font-weight: 700; letter-spacing: 4px;
+  text-transform: uppercase; margin-bottom: 28px;
+  animation: fadeUp 0.8s ease forwards;
+}
+.hero-title {
+  font-family: 'Amiri', serif;
+  font-size: clamp(4.5rem, 11vw, 9rem);
+  font-weight: 700; line-height: 1;
+  color: var(--cream);
+  margin-bottom: 8px;
+  animation: fadeUp 0.9s ease forwards;
+}
+.hero-title span { color: var(--gold); }
+.hero-title-en {
+  font-size: 1rem; color: var(--text-dim);
+  letter-spacing: 8px; text-transform: uppercase;
+  margin-bottom: 28px;
+  animation: fadeUp 1s ease forwards;
+}
+.hero-tagline {
+  font-size: 1.25rem; color: rgba(250,246,238,0.75);
+  line-height: 1.9; max-width: 680px; margin: 0 auto 52px;
+  animation: fadeUp 1.1s ease forwards;
+}
+.hero-tagline strong { color: var(--gold-light); }
+.hero-kpis {
+  display: flex; gap: 48px; justify-content: center; flex-wrap: wrap;
+  animation: fadeUp 1.2s ease forwards;
+}
+.hero-kpi { text-align: center; }
+.hero-kpi .kv {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 2.8rem; font-weight: 900; color: var(--gold); line-height: 1;
+}
+.hero-kpi .kl { font-size: 0.75rem; color: var(--text-dim); margin-top: 4px; letter-spacing: 1px; }
+.hero-divider {
+  width: 1px; height: 60px; background: rgba(200,169,110,0.3);
+  align-self: center;
+}
+.scroll-cue {
+  position: absolute; bottom: 36px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--text-dim); font-size: 0.7rem; letter-spacing: 2px;
+  animation: bob 2s ease-in-out infinite;
+}
+.scroll-arr { width: 18px; height: 18px; border-left: 2px solid var(--gold); border-bottom: 2px solid var(--gold); transform: rotate(-45deg); }
+
+/* ===== SECTION HEADERS ===== */
+.sec-eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  color: var(--emerald); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 4px; text-transform: uppercase; margin-bottom: 18px;
+}
+.sec-eyebrow::before { content: ''; width: 28px; height: 2px; background: var(--emerald); }
+.sec-title {
+  font-family: 'Tajawal', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800; margin-bottom: 16px; line-height: 1.25;
+  color: var(--ink);
+}
+.sec-title .hl { color: var(--emerald); }
+.sec-title .gl { color: var(--gold); }
+.sec-desc {
+  font-size: 1.05rem; color: var(--text-warm);
+  max-width: 680px; line-height: 1.95; margin-bottom: 56px;
+}
+
+/* ===== PROBLEM ===== */
+.prob-intro {
+  background: var(--ink); border-radius: 20px;
+  padding: 40px 48px; margin-bottom: 40px;
+  border-right: 5px solid var(--gold);
+  position: relative; overflow: hidden;
+}
+.prob-intro::before {
+  content: '"'; position: absolute; top: -20px; right: 32px;
+  font-family: 'Amiri', serif; font-size: 12rem; color: rgba(200,169,110,0.07);
+  line-height: 1;
+}
+.prob-intro p {
+  font-size: 1.2rem; color: var(--cream); line-height: 2;
+  position: relative; z-index: 1;
+}
+.prob-intro strong { color: var(--gold); }
+.prob-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.prob-card {
+  background: white; border-radius: 16px; padding: 28px 30px;
+  border: 1px solid var(--cream3);
+  border-top: 4px solid;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.prob-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+.prob-card:nth-child(1) { border-top-color: var(--red-accent); }
+.prob-card:nth-child(2) { border-top-color: var(--gold); }
+.prob-card:nth-child(3) { border-top-color: var(--blue-accent); }
+.prob-card:nth-child(4) { border-top-color: var(--emerald); }
+.pc-who { font-size: 0.72rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; color: var(--text-dim); }
+.pc-pain { font-size: 2.2rem; margin-bottom: 10px; }
+.pc-title { font-weight: 700; font-size: 1rem; margin-bottom: 10px; color: var(--ink); }
+.pc-desc { font-size: 0.88rem; color: var(--text-warm); line-height: 1.75; }
+
+/* ===== SOLUTION ===== */
+.sol-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start; }
+.sol-features { display: flex; flex-direction: column; gap: 18px; }
+.sol-feat {
+  display: flex; gap: 18px; align-items: flex-start;
+  padding: 22px 26px; background: white;
+  border-radius: 14px; border: 1px solid var(--cream3);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: all 0.3s;
+}
+.sol-feat:hover { border-color: var(--emerald); box-shadow: 0 4px 24px var(--emerald-glow); }
+.sf-icon {
+  width: 46px; height: 46px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--emerald-light), var(--emerald));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0; color: white;
+}
+.sf-num { font-size: 0.65rem; font-weight: 900; color: var(--emerald); letter-spacing: 2px; margin-bottom: 4px; }
+.sf-title { font-weight: 700; margin-bottom: 6px; font-size: 0.97rem; }
+.sf-desc { color: var(--text-warm); font-size: 0.86rem; line-height: 1.7; }
+.sol-visual {
+  position: sticky; top: 120px;
+  background: var(--ink); border-radius: 24px; padding: 40px;
+  border: 1px solid rgba(200,169,110,0.2);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+.sv-title { font-family: 'Amiri', serif; font-size: 1.4rem; color: var(--gold); text-align: center; margin-bottom: 28px; }
+.flow-step {
+  display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px;
+}
+.fs-dot {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 900; color: var(--ink);
+  flex-shrink: 0;
+}
+.fs-text { color: rgba(250,246,238,0.8); font-size: 0.88rem; line-height: 1.6; padding-top: 6px; }
+.fs-connector { width: 2px; height: 20px; background: rgba(200,169,110,0.2); margin: 0 0 0 15px; }
+.sol-tag {
+  display: inline-block; margin-top: 28px; width: 100%;
+  text-align: center; padding: 14px;
+  background: rgba(27,107,71,0.2); border-radius: 10px;
+  border: 1px solid rgba(27,107,71,0.4);
+  color: var(--emerald-light); font-weight: 700; font-size: 0.9rem;
+}
+
+/* ===== MARKET ===== */
+.mkt-hero {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-bottom: 48px;
+}
+.mkt-box {
+  border-radius: 18px; padding: 36px 28px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.mkt-box.tam {
+  background: linear-gradient(145deg, var(--emerald), #0D4A31);
+  color: white;
+}
+.mkt-box.sam {
+  background: linear-gradient(145deg, #8B6B2E, #5A3E0A);
+  color: white;
+}
+.mkt-box.som {
+  background: white; border: 2px solid var(--emerald);
+}
+.mkt-box .mb-type { font-size: 0.68rem; letter-spacing: 4px; font-weight: 700; margin-bottom: 14px; opacity: 0.7; }
+.mkt-box .mb-val {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 3rem; font-weight: 900; line-height: 1; margin-bottom: 8px;
+}
+.tam .mb-val { color: var(--gold-light); }
+.sam .mb-val { color: var(--cream); }
+.som .mb-val { color: var(--emerald); }
+.mkt-box .mb-lbl { font-size: 0.83rem; opacity: 0.75; }
+.som .mb-lbl { color: var(--text-warm); opacity: 1; }
+.mkt-segments { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 18px; margin-bottom: 48px; }
+.seg-card {
+  background: white; border-radius: 14px; padding: 24px;
+  border: 1px solid var(--cream3); display: flex; gap: 16px; align-items: center;
+}
+.seg-icon { font-size: 2rem; flex-shrink: 0; }
+.seg-val { font-size: 1.8rem; font-weight: 900; color: var(--emerald); line-height: 1; }
+.seg-lbl { font-size: 0.8rem; color: var(--text-dim); }
+
+/* ===== COMPETITORS ===== */
+.comp-wrap { overflow-x: auto; }
+.comp-table { width: 100%; border-collapse: collapse; border-radius: 16px; overflow: hidden; }
+.comp-table th {
+  background: var(--emerald); color: white;
+  padding: 16px 20px; font-size: 0.8rem;
+  font-weight: 700; letter-spacing: 1px; text-align: center;
+}
+.comp-table th:first-child { text-align: right; border-radius: 0; }
+.comp-table td {
+  padding: 15px 20px; border-bottom: 1px solid var(--cream3);
+  font-size: 0.88rem; background: white; text-align: center;
+  transition: background 0.2s;
+}
+.comp-table td:first-child { text-align: right; font-weight: 700; }
+.comp-table tr:hover td { background: var(--cream); }
+.waqf-row td { background: rgba(27,107,71,0.06) !important; border-right: 4px solid var(--emerald); font-weight: 700; }
+.waqf-row td:first-child { color: var(--emerald); }
+.ck { color: var(--emerald); font-size: 1.2rem; }
+.cx { color: var(--red-accent); font-size: 1.2rem; }
+.cp { color: var(--gold); font-size: 1.1rem; }
+.comp-note {
+  margin-top: 28px; padding: 20px 28px;
+  background: rgba(196,75,43,0.07); border-radius: 12px;
+  border-right: 4px solid var(--red-accent);
+  font-size: 0.9rem; color: var(--text-warm); line-height: 1.7;
+}
+.comp-note strong { color: var(--red-accent); }
+
+/* ===== FINANCIALS ===== */
+.fin-y1 {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 20px; margin-bottom: 40px;
+}
+.fin-card {
+  background: white; border-radius: 16px; padding: 28px 24px; text-align: center;
+  border: 1px solid var(--cream3); border-bottom: 4px solid;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+}
+.fin-card:nth-child(1) { border-bottom-color: var(--emerald); }
+.fin-card:nth-child(2) { border-bottom-color: var(--gold); }
+.fin-card:nth-child(3) { border-bottom-color: var(--blue-accent); }
+.fin-card:nth-child(4) { border-bottom-color: var(--red-accent); }
+.fin-card .fc-val { font-family: 'Tajawal',sans-serif; font-size: 2.4rem; font-weight: 900; line-height: 1; margin-bottom: 6px; }
+.fin-card:nth-child(1) .fc-val { color: var(--emerald); }
+.fin-card:nth-child(2) .fc-val { color: var(--gold); }
+.fin-card:nth-child(3) .fc-val { color: var(--blue-accent); }
+.fin-card:nth-child(4) .fc-val { color: var(--red-accent); }
+.fin-card .fc-lbl { font-size: 0.82rem; color: var(--text-dim); font-weight: 600; }
+.rev-streams { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 20px; margin-bottom: 48px; }
+.rev-stream {
+  background: white; border-radius: 14px; padding: 26px;
+  border: 1px solid var(--cream3);
+  border-right: 4px solid var(--emerald);
+}
+.rs-icon { font-size: 1.8rem; margin-bottom: 12px; }
+.rs-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; }
+.rs-price { font-size: 1.5rem; font-weight: 900; color: var(--emerald); }
+.rs-period { font-size: 0.72rem; color: var(--text-dim); }
+.rs-desc { font-size: 0.83rem; color: var(--text-warm); margin-top: 10px; line-height: 1.65; }
+
+/* ===== GTM ===== */
+.gtm-phases { display: flex; flex-direction: column; gap: 0; }
+.gtm-phase { display: grid; grid-template-columns: 100px 36px 1fr; gap: 20px; align-items: start; }
+.gp-time { text-align: center; padding-top: 2px; }
+.gp-label { font-size: 0.68rem; font-weight: 900; color: var(--emerald); letter-spacing: 2px; text-transform: uppercase; }
+.gp-dur { font-size: 0.78rem; color: var(--text-dim); }
+.gp-line { display: flex; flex-direction: column; align-items: center; }
+.gp-dot { width: 16px; height: 16px; border-radius: 50%; background: var(--emerald); margin-top: 2px; box-shadow: 0 0 0 4px rgba(27,107,71,0.15); }
+.gp-connector { width: 2px; flex-grow: 1; min-height: 50px; background: linear-gradient(to bottom, var(--emerald), rgba(27,107,71,0.1)); margin-top: 6px; }
+.gp-box {
+  background: white; border-radius: 14px; padding: 22px 26px;
+  border: 1px solid var(--cream3); margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.gp-box h4 { font-weight: 800; color: var(--emerald); margin-bottom: 14px; font-size: 1rem; }
+.gp-box ul { list-style: none; }
+.gp-box li { padding: 5px 0; font-size: 0.88rem; color: var(--text-warm); }
+.gp-box li::before { content: '← '; color: var(--gold); font-weight: 700; }
+.gp-target {
+  display: inline-block; margin-top: 10px;
+  background: var(--emerald-pale); border: 1px solid rgba(27,107,71,0.3);
+  border-radius: 100px; padding: 4px 14px;
+  font-size: 0.78rem; font-weight: 700; color: var(--emerald);
+}
+
+/* ===== VALUATION (WHY 500K) ===== */
+#valuation { background: var(--ink); }
+#valuation .sec-title { color: var(--cream); }
+#valuation .sec-title .hl { color: var(--gold); }
+#valuation .sec-desc { color: rgba(250,246,238,0.6); }
+#valuation .sec-eyebrow { color: var(--gold); }
+#valuation .sec-eyebrow::before { background: var(--gold); }
+.val-pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 24px; margin-bottom: 48px; }
+.val-pillar {
+  border-radius: 18px; padding: 32px 28px;
+  border: 1px solid rgba(200,169,110,0.15);
+  background: rgba(255,255,255,0.03);
+  position: relative; overflow: hidden;
+  transition: border-color 0.3s;
+}
+.val-pillar:hover { border-color: rgba(200,169,110,0.4); }
+.vp-num {
+  position: absolute; top: 20px; left: 24px;
+  font-family: 'Tajawal',sans-serif;
+  font-size: 5rem; font-weight: 900;
+  color: rgba(200,169,110,0.06); line-height: 1;
+}
+.vp-icon { font-size: 2.2rem; margin-bottom: 14px; }
+.vp-title { font-weight: 700; color: var(--gold-light); margin-bottom: 10px; font-size: 1rem; }
+.vp-desc { color: rgba(250,246,238,0.6); font-size: 0.88rem; line-height: 1.75; }
+.val-formula {
+  background: rgba(27,107,71,0.12); border: 1px solid rgba(27,107,71,0.3);
+  border-radius: 20px; padding: 40px; text-align: center; margin-bottom: 48px;
+}
+.vf-title { font-size: 0.8rem; color: var(--text-dim); letter-spacing: 3px; margin-bottom: 20px; }
+.vf-eq {
+  font-family: 'Tajawal',sans-serif; font-size: 1.3rem;
+  color: var(--cream); line-height: 2;
+}
+.vf-eq span { color: var(--gold); font-weight: 900; font-size: 1.6rem; }
+.vf-eq .op { color: var(--emerald-light); margin: 0 12px; }
+.val-roi {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
+}
+.roi-card {
+  background: rgba(255,255,255,0.04); border-radius: 14px; padding: 28px; text-align: center;
+  border: 1px solid rgba(200,169,110,0.1);
+}
+.roi-card .rv { font-family:'Tajawal',sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--gold); }
+.roi-card .rl { font-size: 0.8rem; color: rgba(250,246,238,0.5); margin-top: 6px; }
+
+/* ===== CTA ===== */
+#cta {
+  background: linear-gradient(160deg, var(--emerald) 0%, #0D4A31 100%);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; min-height: 85vh;
+}
+.cta-geo {
+  position: absolute; inset: 0; opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cpath d='M50 5 L95 50 L50 95 L5 50Z' fill='none' stroke='%23FAF6EE' stroke-width='1'/%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='%23FAF6EE' stroke-width='0.5'/%3E%3C/svg%3E");
+  background-size: 100px 100px;
+}
+.cta-content { position: relative; z-index: 1; }
+.cta-badge {
+  display: inline-block; border: 1px solid rgba(200,169,110,0.5);
+  color: var(--gold); padding: 7px 22px; border-radius: 100px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 4px;
+  text-transform: uppercase; margin-bottom: 28px;
+}
+.cta-title {
+  font-family: 'Tajawal',sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900;
+  color: var(--cream); line-height: 1.2; margin-bottom: 20px;
+}
+.cta-price {
+  font-family: 'Tajawal',sans-serif;
+  font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 900;
+  color: var(--gold-light); line-height: 1; margin-bottom: 12px;
+}
+.cta-sub { color: rgba(250,246,238,0.65); font-size: 1rem; margin-bottom: 48px; line-height: 1.8; }
+.includes {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  justify-content: center; margin-bottom: 48px;
+}
+.incl-tag {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 100px; padding: 8px 20px;
+  font-size: 0.82rem; color: var(--cream);
+}
+.cta-btn {
+  display: inline-block; padding: 20px 64px;
+  background: var(--gold); color: var(--ink);
+  font-size: 1.1rem; font-weight: 900;
+  border-radius: 100px; text-decoration: none;
+  letter-spacing: 1px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.cta-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 50px rgba(0,0,0,0.4); }
+.footer-brand { margin-top: 80px; color: rgba(250,246,238,0.35); font-size: 0.75rem; letter-spacing: 5px; }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(28px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes bob {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(8px); }
+}
+.fade-in { opacity:0; transform:translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  section { padding: 100px 22px 60px; }
+  nav { padding: 14px 20px; }
+  .nav-links { display:none; }
+  .sol-grid { grid-template-columns:1fr; }
+  .mkt-hero { grid-template-columns:1fr; }
+  .val-roi { grid-template-columns:1fr; }
+  .gtm-phase { grid-template-columns: 70px 28px 1fr; }
+  .hero-divider { display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <div>
+      <div class="nav-logo-ar">وقف رقمي</div>
+      <div class="nav-logo-en">Waqf Digital — SaaS Platform</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#problem">المشكلة</a></li>
+    <li><a href="#solution">الحل</a></li>
+    <li><a href="#market">السوق</a></li>
+    <li><a href="#competitors">المنافسون</a></li>
+    <li><a href="#financials">المالية</a></li>
+    <li><a href="#gtm">الدخول</a></li>
+    <li><a href="#valuation">لماذا 500K</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-geo"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-ayah">﴿ وَمَا تُقَدِّمُوا لِأَنفُسِكُم مِّنْ خَيْرٍ تَجِدُوهُ عِندَ اللَّهِ ﴾</div>
+    <div class="hero-badge">🌿 ملف العرض الاستثماري — 2025</div>
+    <div class="hero-title"><span>وقف</span> رقمي</div>
+    <div class="hero-title-en">WAQF DIGITAL — AI ENDOWMENT MANAGEMENT PLATFORM</div>
+    <div class="hero-tagline">
+      أول منصة SaaS في العالم الإسلامي تُرقمن دورة حياة الوقف بالكامل<br>
+      من <strong>التأسيس حتى التوزيع</strong> — بذكاء اصطناعي يفهم الفقه الإسلامي والأنظمة السعودية
+    </div>
+    <div class="hero-kpis">
+      <div class="hero-kpi"><div class="kv">+200B</div><div class="kl">ريال أصول وقفية غير مُدارة</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-kpi"><div class="kv">90K+</div><div class="kl">وقف مسجّل في السعودية</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-kpi"><div class="kv">65M</div><div class="kl">ريال إيرادات متوقعة (السنة 3)</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-kpi"><div class="kv">500K</div><div class="kl">ريال القيمة الفكرية المطلوبة</div></div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>اكتشف</span><div class="scroll-arr"></div></div>
+</section>
+
+<!-- ===== PROBLEM ===== -->
+<section id="problem">
+  <div class="geo-bg"></div>
+  <div class="sec-eyebrow">01 — المشكلة</div>
+  <h2 class="sec-title">+200 مليار ريال <span class="hl">مجمّدة</span> بلا إدارة</h2>
+  <p class="sec-desc">الأوقاف في السعودية كنز وطني ضخم — لكنه مدفون تحت ركام الإجراءات اليدوية والوثائق الورقية وغياب الشفافية. أربعة أطراف تعاني بصمت كل يوم.</p>
+
+  <div class="prob-intro fade-in">
+    <p>الواقع اليوم: ناظر الوقف يعمل بـ<strong>دفتر ورقي وواتساب</strong>. المستفيد لا يعرف <strong>حقه ولا موعده</strong>. المتبرع الجديد يواجه <strong>إجراءات معقدة تستغرق أشهراً</strong>. والهيئة العامة للأوقاف تراقب <strong>90,000 وقف بأدوات بدائية</strong>. هذا الفراغ الرقمي يُكلّف الاقتصاد الوقفي مليارات سنوياً في عوائد ضائعة وأصول متهالكة.</p>
+  </div>
+
+  <div class="prob-cards fade-in">
+    <div class="prob-card">
+      <div class="pc-who">الناظر — المدير التنفيذي للوقف</div>
+      <div class="pc-pain">📋</div>
+      <div class="pc-title">يعمل بلا أدوات</div>
+      <div class="pc-desc">يُدير أصولاً بالملايين بدفاتر يدوية. لا يوجد نظام لتتبع العقارات، تحصيل الإيجارات، أو صرف المستحقات. أي خطأ يُعرّضه للمساءلة القانونية.</div>
+    </div>
+    <div class="prob-card">
+      <div class="pc-who">المستفيد — الأسرة أو الجهة المستفيدة</div>
+      <div class="pc-pain">❓</div>
+      <div class="pc-title">لا يعرف حقوقه</div>
+      <div class="pc-desc">المستفيد لا يعرف كم يستحق، متى يصله، ولا كيف يتحقق. غياب الشفافية يفتح باب النزاعات والمشاكل الأسرية لسنوات.</div>
+    </div>
+    <div class="prob-card">
+      <div class="pc-who">المتبرع — من يريد إنشاء وقف جديد</div>
+      <div class="pc-pain">🔄</div>
+      <div class="pc-title">إجراءات متشعبة ومُعقدة</div>
+      <div class="pc-desc">إنشاء الوقف يستلزم التنقل بين المحاكم، كتابة العدل، وزارة العدل، والهيئة — ويستغرق أشهراً. هذا يُثني الكثيرين عن التبرع.</div>
+    </div>
+    <div class="prob-card">
+      <div class="pc-who">الهيئة العامة للأوقاف</div>
+      <div class="pc-pain">📊</div>
+      <div class="pc-title">رقابة بلا بيانات</div>
+      <div class="pc-desc">تراقب آلاف الأوقاف عبر تقارير ورقية متأخرة. لا توجد لوحة بيانات موحّدة ولا مؤشرات أداء. اكتشاف التجاوزات يأتي بعد فوات الأوان.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOLUTION ===== -->
+<section id="solution">
+  <div class="sec-eyebrow">02 — الحل</div>
+  <h2 class="sec-title">منظومة <span class="hl">رقمية متكاملة</span> للوقف</h2>
+  <p class="sec-desc">وقف رقمي تُرقمن كل مرحلة: التأسيس، الإدارة، الاستثمار، التوزيع، والرقابة — في منصة واحدة تفهم الفقه الإسلامي والأنظمة السعودية.</p>
+
+  <div class="sol-grid">
+    <div class="sol-features fade-in">
+      <div class="sol-feat">
+        <div class="sf-icon">📝</div>
+        <div>
+          <div class="sf-num">المكوّن 01</div>
+          <div class="sf-title">إنشاء الوقف في 10 دقائق</div>
+          <div class="sf-desc">واجهة مبسطة تُرشد المتبرع خطوة بخطوة لإنشاء وقفه شرعياً وقانونياً — مع توليد صك وقف رقمي موثّق عبر وزارة العدل تلقائياً.</div>
+        </div>
+      </div>
+      <div class="sol-feat">
+        <div class="sf-icon">🏛️</div>
+        <div>
+          <div class="sf-num">المكوّن 02</div>
+          <div class="sf-title">لوحة إدارة الأصول الوقفية</div>
+          <div class="sf-desc">الناظر يرى كل أصول الوقف — عقارات، أسهم، أموال — مع تقارير الأداء الشهرية وتنبيهات الصيانة وتحصيل الإيجارات تلقائياً.</div>
+        </div>
+      </div>
+      <div class="sol-feat">
+        <div class="sf-icon">🧠</div>
+        <div>
+          <div class="sf-num">المكوّن 03</div>
+          <div class="sf-title">الذكاء الاصطناعي يقترح الاستثمار الأمثل</div>
+          <div class="sf-desc">بناءً على نوع الأصل وموقعه وحجمه، المنصة تقترح أفضل طريقة لتنميته شرعياً: تأجير، تطوير، أو صكوك — مع تقييم المخاطر.</div>
+        </div>
+      </div>
+      <div class="sol-feat">
+        <div class="sf-icon">💸</div>
+        <div>
+          <div class="sf-num">المكوّن 04</div>
+          <div class="sf-title">التوزيع الآلي على المستفيدين</div>
+          <div class="sf-desc">العوائد تُوزَّع تلقائياً على المستفيدين المسجّلين وفق شروط الواقف بدقة كاملة — مع إشعارات فورية وسجل موثّق لكل عملية صرف.</div>
+        </div>
+      </div>
+      <div class="sol-feat">
+        <div class="sf-icon">🔍</div>
+        <div>
+          <div class="sf-num">المكوّن 05</div>
+          <div class="sf-title">بوابة الشفافية العامة</div>
+          <div class="sf-desc">كل وقف عنده صفحة عامة تُظهر قيمة الأصول، العوائد السنوية، المستفيدين، وتقارير الناظر — ثقة مطلقة بلا غموض.</div>
+        </div>
+      </div>
+      <div class="sol-feat">
+        <div class="sf-icon">🏛️</div>
+        <div>
+          <div class="sf-num">المكوّن 06</div>
+          <div class="sf-title">ربط مباشر بالهيئة العامة للأوقاف</div>
+          <div class="sf-desc">التقارير الرقابية المطلوبة تُولَّد تلقائياً وتُرسل إلكترونياً — صفر ورق، صفر تأخير، صفر مخالفات.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sol-visual fade-in">
+      <div class="sv-title">رحلة الوقف الرقمي</div>
+      <div class="flow-step">
+        <div class="fs-dot">1</div>
+        <div class="fs-text">المتبرع يُنشئ وقفه في 10 دقائق عبر المنصة</div>
+      </div>
+      <div class="fs-connector"></div>
+      <div class="flow-step">
+        <div class="fs-dot">2</div>
+        <div class="fs-text">صك وقف رقمي موثّق من وزارة العدل تلقائياً</div>
+      </div>
+      <div class="fs-connector"></div>
+      <div class="flow-step">
+        <div class="fs-dot">3</div>
+        <div class="fs-text">الناظر يُدير الأصول عبر لوحة تحكم ذكية</div>
+      </div>
+      <div class="fs-connector"></div>
+      <div class="flow-step">
+        <div class="fs-dot">4</div>
+        <div class="fs-text">الذكاء الاصطناعي يُقترح أفضل طرق التنمية</div>
+      </div>
+      <div class="fs-connector"></div>
+      <div class="flow-step">
+        <div class="fs-dot">5</div>
+        <div class="fs-text">العوائد تُوزَّع تلقائياً على المستفيدين</div>
+      </div>
+      <div class="fs-connector"></div>
+      <div class="flow-step">
+        <div class="fs-dot">6</div>
+        <div class="fs-text">تقارير رقابية تلقائية للهيئة العامة للأوقاف</div>
+      </div>
+      <div class="sol-tag">🌿 الوقف يعمل — حتى وأنت نائم</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARKET ===== -->
+<section id="market">
+  <div class="geo-bg"></div>
+  <div class="sec-eyebrow">03 — تحليل السوق</div>
+  <h2 class="sec-title">سوق <span class="gl">ضخم</span> بلا منافس رقمي حقيقي</h2>
+  <p class="sec-desc">الاقتصاد الوقفي في السعودية جبارٌ بالأرقام — لكنه متخلف رقمياً بشكل كامل. هذا التناقض هو فرصتنا.</p>
+
+  <div class="mkt-hero fade-in">
+    <div class="mkt-box tam">
+      <div class="mb-type">TAM — إجمالي السوق</div>
+      <div class="mb-val">+200B</div>
+      <div class="mb-lbl">ريال — قيمة الأصول الوقفية في السعودية</div>
+    </div>
+    <div class="mkt-box sam">
+      <div class="mb-type">SAM — السوق المخدوم</div>
+      <div class="mb-val">4.8B</div>
+      <div class="mb-lbl">ريال — سوق إدارة الأوقاف والاستشارات الوقفية</div>
+    </div>
+    <div class="mkt-box som">
+      <div class="mb-type">SOM — الحصة المستهدفة</div>
+      <div class="mb-val">480M</div>
+      <div class="mb-lbl">ريال — هدف 5 سنوات (10% من SAM)</div>
+    </div>
+  </div>
+
+  <div class="mkt-segments fade-in">
+    <div class="seg-card">
+      <div class="seg-icon">🕌</div>
+      <div><div class="seg-val">90,000+</div><div class="seg-lbl">وقف مسجّل في السعودية (عملاء فوريون)</div></div>
+    </div>
+    <div class="seg-card">
+      <div class="seg-icon">👤</div>
+      <div><div class="seg-val">40,000+</div><div class="seg-lbl">ناظر وقف (المشترك الرئيسي)</div></div>
+    </div>
+    <div class="seg-card">
+      <div class="seg-icon">✨</div>
+      <div><div class="seg-val">15,000+</div><div class="seg-lbl">شخص يُنشئ وقفاً جديداً سنوياً</div></div>
+    </div>
+    <div class="seg-card">
+      <div class="seg-icon">🌍</div>
+      <div><div class="seg-val">1 تريليون $</div><div class="seg-lbl">حجم الاقتصاد الوقفي العالمي (التوسع المستقبلي)</div></div>
+    </div>
+  </div>
+
+  <div style="background:white;border-radius:20px;padding:40px;border:1px solid var(--cream3);box-shadow:0 2px 20px rgba(0,0,0,0.05);" class="fade-in">
+    <div style="font-weight:700;margin-bottom:24px;color:var(--text-warm);">📈 توقعات نمو الإيرادات السنوية (بالمليون ريال)</div>
+    <canvas id="growthChart" height="90"></canvas>
+  </div>
+</section>
+
+<!-- ===== COMPETITORS ===== -->
+<section id="competitors">
+  <div class="sec-eyebrow">04 — تحليل المنافسين</div>
+  <h2 class="sec-title">الفراغ <span class="hl">التنافسي الكامل</span></h2>
+  <p class="sec-desc">لا يوجد في العالم منصة SaaS متخصصة في الأوقاف الإسلامية تجمع بين الإدارة والاستثمار والتوزيع والامتثال التنظيمي. وقف رقمي هي الأولى.</p>
+
+  <div class="comp-wrap fade-in">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th style="text-align:right;">المنصة / الحل</th>
+          <th>إدارة الأوقاف</th>
+          <th>ذكاء اصطناعي</th>
+          <th>امتثال سعودي</th>
+          <th>توزيع آلي</th>
+          <th>ربط بالهيئة</th>
+          <th>إنشاء الوقف</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="waqf-row">
+          <td>⭐ وقف رقمي (Waqf Digital)</td>
+          <td><span class="ck">✓</span></td>
+          <td><span class="ck">✓</span></td>
+          <td><span class="ck">✓</span></td>
+          <td><span class="ck">✓</span></td>
+          <td><span class="ck">✓</span></td>
+          <td><span class="ck">✓</span></td>
+        </tr>
+        <tr>
+          <td>برامج المحاسبة (SAP / Oracle)</td>
+          <td><span class="cp">◑</span></td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="cx">✗</span></td>
+        </tr>
+        <tr>
+          <td>بوابة الهيئة العامة للأوقاف</td>
+          <td><span class="cp">◑</span></td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="ck">✓</span></td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="ck">✓</span></td>
+          <td><span class="cp">◑</span></td>
+        </tr>
+        <tr>
+          <td>أنظمة العقارات المحلية</td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="cp">◑</span></td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="cx">✗</span></td>
+        </tr>
+        <tr>
+          <td>شركات استشارات الأوقاف</td>
+          <td><span class="cp">◑</span></td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="ck">✓</span></td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="cp">◑</span></td>
+          <td><span class="cx">✗</span></td>
+        </tr>
+        <tr>
+          <td>Excel / أدوات يدوية</td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="cx">✗</span></td>
+          <td><span class="cx">✗</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="comp-note fade-in">
+    <strong>الحاجز التنافسي الحقيقي:</strong> أي شركة أجنبية تريد دخول هذا السوق تحتاج سنوات لفهم الفقه الإسلامي + الأنظمة السعودية + بناء الثقة مع الهيئة العامة للأوقاف. من يدخل أولاً يصبح <strong>البنية التحتية الرقمية للقطاع بأكمله</strong> ويصعب إزاحته.
+  </div>
+
+  <div style="margin-top:40px;background:white;border-radius:20px;padding:40px;border:1px solid var(--cream3);" class="fade-in">
+    <div style="font-weight:700;margin-bottom:24px;color:var(--text-warm);">🎯 مقارنة نقاط القوة (من 10)</div>
+    <canvas id="radarChart" height="110"></canvas>
+  </div>
+</section>
+
+<!-- ===== FINANCIALS ===== -->
+<section id="financials">
+  <div class="geo-bg"></div>
+  <div class="sec-eyebrow">05 — التوقعات المالية</div>
+  <h2 class="sec-title">مسار <span class="hl">إيرادي</span> واضح ومتنوع</h2>
+  <p class="sec-desc">أربعة مصادر دخل متكاملة تضمن استدامة الإيرادات وتقليل المخاطر — مع نمو متسارع بدءاً من السنة الثانية.</p>
+
+  <div class="fin-y1 fade-in">
+    <div class="fin-card">
+      <div class="fc-val">8.5M</div>
+      <div class="fc-lbl">ريال — إيرادات السنة الأولى</div>
+    </div>
+    <div class="fin-card">
+      <div class="fc-val">28M</div>
+      <div class="fc-lbl">ريال — إيرادات السنة الثانية</div>
+    </div>
+    <div class="fin-card">
+      <div class="fc-val">65M</div>
+      <div class="fc-lbl">ريال — إيرادات السنة الثالثة</div>
+    </div>
+    <div class="fin-card">
+      <div class="fc-val">18 شهراً</div>
+      <div class="fc-lbl">نقطة التعادل المتوقعة</div>
+    </div>
+  </div>
+
+  <div class="rev-streams fade-in">
+    <div class="rev-stream">
+      <div class="rs-icon">👤</div>
+      <div class="rs-title">اشتراك الناظر (B2C)</div>
+      <div class="rs-price">150–3,000</div>
+      <div class="rs-period">ريال / شهر حسب حجم الوقف</div>
+      <div class="rs-desc">مجاني محدود للأوقاف الصغيرة، Pro للمتوسطة، Enterprise للأوقاف الكبيرة ومتعددة الأصول.</div>
+    </div>
+    <div class="rev-stream">
+      <div class="rs-icon">✍️</div>
+      <div class="rs-title">رسوم إنشاء الوقف الجديد</div>
+      <div class="rs-price">500–2,000</div>
+      <div class="rs-period">ريال / مرة واحدة</div>
+      <div class="rs-desc">رسوم لمرة واحدة لكل وقف جديد يُنشأ عبر المنصة — مع 15,000 وقف جديد سنوياً، هذا مصدر ثابت.</div>
+    </div>
+    <div class="rev-stream">
+      <div class="rs-icon">📈</div>
+      <div class="rs-title">نسبة من العوائد الاستثمارية</div>
+      <div class="rs-price">0.5–1%</div>
+      <div class="rs-period">من العوائد المُدارة عبر المنصة</div>
+      <div class="rs-desc">أقوى مصادر الدخل على المدى الطويل — كلما نمت الأصول الوقفية المُدارة، نمت إيراداتنا تلقائياً.</div>
+    </div>
+    <div class="rev-stream">
+      <div class="rs-icon">🏛️</div>
+      <div class="rs-title">العقود الحكومية والمؤسسية</div>
+      <div class="rs-price">50K–500K</div>
+      <div class="rs-period">ريال / عقد سنوي</div>
+      <div class="rs-desc">عقود مع الهيئة العامة للأوقاف، الجامعات، الأوقاف الملكية، والمؤسسات الخيرية الكبرى.</div>
+    </div>
+  </div>
+
+  <div style="background:white;border-radius:20px;padding:40px;border:1px solid var(--cream3);box-shadow:0 2px 20px rgba(0,0,0,0.05);" class="fade-in">
+    <div style="font-weight:700;margin-bottom:24px;color:var(--text-warm);">💰 توزيع الإيرادات — السنة الثالثة (65 مليون ريال)</div>
+    <canvas id="pieChart" height="80"></canvas>
+  </div>
+</section>
+
+<!-- ===== GTM ===== -->
+<section id="gtm">
+  <div class="sec-eyebrow">06 — استراتيجية الدخول للسوق</div>
+  <h2 class="sec-title">من <span class="hl">الصفر</span> إلى <span class="gl">قيادة القطاع</span> في 12 شهراً</h2>
+  <p class="sec-desc">استراتيجية دخول تبدأ من أهل الثقة — الهيئة العامة للأوقاف — وتتوسع عبر شبكة الناظرين والمؤسسات الدينية والمالية.</p>
+
+  <div class="gtm-phases fade-in">
+    <div class="gtm-phase">
+      <div class="gp-time"><div class="gp-label">M1</div><div class="gp-dur">شهور 1–3</div></div>
+      <div class="gp-line"><div class="gp-dot"></div><div class="gp-connector"></div></div>
+      <div class="gp-box">
+        <h4>🏗️ التأسيس وبناء الشرعية</h4>
+        <ul>
+          <li>التسجيل الرسمي وتأمين التراخيص اللازمة</li>
+          <li>الاجتماع مع الهيئة العامة للأوقاف لعرض المنصة</li>
+          <li>استقطاب مستشار شرعي بارز لضمان التوافق الفقهي</li>
+          <li>بناء MVP مع 5 أوقاف تجريبية كبرى</li>
+          <li>تسجيل الملكية الفكرية والعلامة التجارية</li>
+        </ul>
+        <span class="gp-target">🎯 الهدف: شراكة تجريبية مع الهيئة</span>
+      </div>
+    </div>
+    <div class="gtm-phase">
+      <div class="gp-time"><div class="gp-label">M2</div><div class="gp-dur">شهور 4–6</div></div>
+      <div class="gp-line"><div class="gp-dot"></div><div class="gp-connector"></div></div>
+      <div class="gp-box">
+        <h4>🚀 الإطلاق المحدود والاعتماد</h4>
+        <ul>
+          <li>إطلاق النسخة Beta لـ 200 ناظر وقف مختار</li>
+          <li>التسويق عبر قنوات العلماء والمؤثرين الدينيين الموثوقين</li>
+          <li>ورشة عمل في غرفة الرياض وجدة للمستثمرين الوقفيين</li>
+          <li>إطلاق الباقة المدفوعة بعد تحقيق معدل رضا 85%+</li>
+          <li>شراكة مع بنك سعودي لتسهيل المعاملات المالية الوقفية</li>
+        </ul>
+        <span class="gp-target">🎯 الهدف: 500 ناظر مشترك + عقد حكومي أول</span>
+      </div>
+    </div>
+    <div class="gtm-phase">
+      <div class="gp-time"><div class="gp-label">M3</div><div class="gp-dur">شهور 7–9</div></div>
+      <div class="gp-line"><div class="gp-dot"></div><div class="gp-connector"></div></div>
+      <div class="gp-box">
+        <h4>📈 التوسع والشراكات الاستراتيجية</h4>
+        <ul>
+          <li>توسيع الفريق البيعي في الرياض وجدة والمنطقة الشرقية</li>
+          <li>إطلاق وحدة إنشاء الأوقاف الجديدة للعامة</li>
+          <li>شراكة مع شركات إدارة العقارات لتفعيل الأصول الوقفية</li>
+          <li>إطلاق تقرير سنوي عن الاقتصاد الوقفي السعودي (تسويق بالمحتوى)</li>
+        </ul>
+        <span class="gp-target">🎯 الهدف: 2,000 ناظر + 3 عقود مؤسسية</span>
+      </div>
+    </div>
+    <div class="gtm-phase">
+      <div class="gp-time"><div class="gp-label">M4</div><div class="gp-dur">شهور 10–12</div></div>
+      <div class="gp-line"><div class="gp-dot"></div></div>
+      <div class="gp-box">
+        <h4>💰 القيادة والتوسع الإقليمي</h4>
+        <ul>
+          <li>الإعلان عن جولة استثمار Series A</li>
+          <li>بدء دراسة التوسع للإمارات والكويت وماليزيا</li>
+          <li>إطلاق وحدة الاستثمار الوقفي بالذكاء الاصطناعي</li>
+          <li>مقترح للاندماج مع منظومة الهيئة الرقمية كشريك تقني رسمي</li>
+        </ul>
+        <span class="gp-target">🎯 الهدف: 5,000 ناظر + قيادة القطاع</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VALUATION ===== -->
+<section id="valuation">
+  <div class="sec-eyebrow">07 — لماذا تستحق 500,000 ريال؟</div>
+  <h2 class="sec-title">ليست فكرة — بل <span class="hl">بنية تحتية</span> لقطاع بأكمله</h2>
+  <p class="sec-desc">المستثمر الذكي لا يشتري "فكرة" — يشتري امتلاك البنية التحتية الرقمية لقطاع ضخم لا يزال خالياً من المنافسة الحقيقية.</p>
+
+  <div class="val-pillars fade-in">
+    <div class="val-pillar">
+      <div class="vp-num">1</div>
+      <div class="vp-icon">📦</div>
+      <div class="vp-title">العملاء موجودون الآن — لا تحتاج إقناعهم</div>
+      <div class="vp-desc">90,000 وقف مسجّل = 40,000 ناظر محتاج للحل اليوم. السوق لا ينتظر — الطلب موجود والمنافسة غائبة. هذا هو أحلام المستثمرين.</div>
+    </div>
+    <div class="val-pillar">
+      <div class="vp-num">2</div>
+      <div class="vp-icon">🔒</div>
+      <div class="vp-title">محظور على الأجانب — مُحمي طبيعياً</div>
+      <div class="vp-desc">أي منافس أجنبي يحتاج سنوات لفهم الفقه + الأنظمة + بناء الثقة. من يدخل أولاً يصنع جداراً لا يُكسر. الملكية الأولى هي الأثمن.</div>
+    </div>
+    <div class="val-pillar">
+      <div class="vp-num">3</div>
+      <div class="vp-icon">🏛️</div>
+      <div class="vp-title">الدولة شريكة — لا منافسة</div>
+      <div class="vp-desc">الهيئة العامة للأوقاف تبحث عن هذا الحل ضمن مستهدفات التحول الرقمي لرؤية 2030. من يدخل كشريك تقني للهيئة يضمن السوق كله.</div>
+    </div>
+    <div class="val-pillar">
+      <div class="vp-num">4</div>
+      <div class="vp-icon">🌍</div>
+      <div class="vp-title">قابل للتصدير لتريليون دولار</div>
+      <div class="vp-desc">الاقتصاد الوقفي العالمي يتجاوز تريليون دولار في ماليزيا وإندونيسيا وتركيا وإفريقيا. نجاح السعودية = جواز سفر للعالم الإسلامي كله.</div>
+    </div>
+    <div class="val-pillar">
+      <div class="vp-num">5</div>
+      <div class="vp-icon">📊</div>
+      <div class="vp-title">عائد استثماري مضمون بالأرقام</div>
+      <div class="vp-desc">500K ريال مقابل حصة في منصة تستهدف 65M ريال إيرادات في السنة الثالثة = عائد 130× على الاستثمار الفكري. هذا ليس مجازفة — هذا حساب.</div>
+    </div>
+    <div class="val-pillar">
+      <div class="vp-num">6</div>
+      <div class="vp-icon">⏰</div>
+      <div class="vp-title">التوقيت لن يتكرر</div>
+      <div class="vp-desc">رؤية 2030 تضخ مليارات في التحول الرقمي الآن. نافذة الدخول مفتوحة لفترة محدودة — بعد 3 سنوات سيكون هناك لاعب راسخ ولن تستطيع المنافسة.</div>
+    </div>
+  </div>
+
+  <div class="val-formula fade-in">
+    <div class="vf-title">معادلة القيمة الاستثمارية</div>
+    <div class="vf-eq">
+      <span>90,000 وقف</span>
+      <span class="op">×</span>
+      <span>متوسط 500 ريال/شهر</span>
+      <span class="op">=</span>
+      <span>540M ريال/سنة</span>
+      <br>
+      السوق الكامل المُتاح بدون منافس واحد
+    </div>
+  </div>
+
+  <div class="val-roi fade-in">
+    <div class="roi-card">
+      <div class="rv">130×</div>
+      <div class="rl">العائد المتوقع على الاستثمار الفكري (3 سنوات)</div>
+    </div>
+    <div class="roi-card">
+      <div class="rv">65M ر</div>
+      <div class="rl">إيرادات السنة الثالثة (أساس تقييم المنصة)</div>
+    </div>
+    <div class="roi-card">
+      <div class="rv">0</div>
+      <div class="rl">منافس مباشر في السوق السعودي اليوم</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section id="cta">
+  <div class="cta-geo"></div>
+  <div class="cta-content">
+    <div class="cta-badge">🌿 العرض الاستثماري النهائي</div>
+    <div class="cta-title">فرصة لن تتكرر في<br>قطاع لم يُلمسه أحد</div>
+    <div style="color:rgba(250,246,238,0.6);font-size:1rem;margin-bottom:16px;">القيمة الفكرية الكاملة للمنصة — ملف الاستثمار الكامل</div>
+    <div class="cta-price">500,000 ريال</div>
+    <div class="cta-sub">
+      السعر يشمل نقل كامل حقوق الملكية الفكرية<br>
+      + دراسة الجدوى + الخوارزميات + استراتيجية الدخول + المستندات التأسيسية
+    </div>
+
+    <div class="includes">
+      <div class="incl-tag">✓ دراسة الجدوى الكاملة</div>
+      <div class="incl-tag">✓ نموذج العمل التجاري</div>
+      <div class="incl-tag">✓ مخططات الخوارزميات</div>
+      <div class="incl-tag">✓ استراتيجية الدخول</div>
+      <div class="incl-tag">✓ ملف التقديم للهيئة</div>
+      <div class="incl-tag">✓ حقوق الملكية الفكرية</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:600px;margin:0 auto 48px;" class="fade-in">
+      <div style="background:rgba(255,255,255,0.1);border-radius:14px;padding:20px;text-align:center;">
+        <div style="font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:900;color:var(--gold-light);">90K</div>
+        <div style="font-size:0.75rem;color:rgba(250,246,238,0.55);margin-top:4px;">وقف مسجّل = عملاء فوريون</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.1);border-radius:14px;padding:20px;text-align:center;">
+        <div style="font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:900;color:var(--gold-light);">65M</div>
+        <div style="font-size:0.75rem;color:rgba(250,246,238,0.55);margin-top:4px;">ريال إيرادات (السنة 3)</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.1);border-radius:14px;padding:20px;text-align:center;">
+        <div style="font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:900;color:var(--gold-light);">0</div>
+        <div style="font-size:0.75rem;color:rgba(250,246,238,0.55);margin-top:4px;">منافس مباشر في السوق</div>
+      </div>
+    </div>
+
+    <a href="mailto:invest@arkane-ai.com" class="cta-btn">📩 تواصل للاستحواذ على الفكرة</a>
+  </div>
+  <div class="footer-brand">ARKANE AI — STRATEGIC INTELLIGENCE © 2025</div>
+</section>
+
+<script>
+// Intersection Observer
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// Chart defaults
+Chart.defaults.font.family = "'Cairo', sans-serif";
+
+// Growth Line Chart
+new Chart(document.getElementById('growthChart').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: ['Q1', 'Q2', 'Q3', 'Q4', 'السنة 2', 'السنة 3'],
+    datasets: [
+      {
+        label: 'الإيراد الفعلي',
+        data: [0.6, 1.8, 4.2, 8.5, 28, 65],
+        backgroundColor: [
+          'rgba(27,107,71,0.7)',
+          'rgba(27,107,71,0.75)',
+          'rgba(27,107,71,0.8)',
+          'rgba(27,107,71,0.85)',
+          'rgba(27,107,71,0.9)',
+          'rgba(27,107,71,1)',
+        ],
+        borderColor: '#1B6B47',
+        borderWidth: 2, borderRadius: 8
+      },
+      {
+        label: 'نقطة التعادل',
+        data: [4, 4, 4, 4, 4, 4],
+        type: 'line',
+        borderColor: '#C8A96E',
+        borderWidth: 2, borderDash: [6,4],
+        pointRadius: 0, fill: false,
+        tension: 0
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { callback: v => v + 'M ر' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// Radar Chart
+new Chart(document.getElementById('radarChart').getContext('2d'), {
+  type: 'radar',
+  data: {
+    labels: ['إدارة الأوقاف', 'ذكاء اصطناعي', 'امتثال سعودي', 'توزيع آلي', 'ربط حكومي', 'إنشاء الوقف'],
+    datasets: [
+      {
+        label: 'وقف رقمي',
+        data: [10, 10, 10, 10, 9, 10],
+        borderColor: '#1B6B47',
+        backgroundColor: 'rgba(27,107,71,0.15)',
+        borderWidth: 3,
+        pointBackgroundColor: '#1B6B47',
+        pointRadius: 5
+      },
+      {
+        label: 'SAP / Oracle',
+        data: [5, 2, 2, 1, 1, 1],
+        borderColor: '#C8A96E',
+        backgroundColor: 'rgba(200,169,110,0.1)',
+        borderWidth: 2,
+        pointBackgroundColor: '#C8A96E'
+      },
+      {
+        label: 'بوابة الهيئة الحالية',
+        data: [4, 1, 7, 1, 7, 4],
+        borderColor: '#2B5EA7',
+        backgroundColor: 'rgba(43,94,167,0.08)',
+        borderWidth: 2,
+        pointBackgroundColor: '#2B5EA7'
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      r: {
+        min:0, max:10,
+        grid: { color: 'rgba(0,0,0,0.07)' },
+        angleLines: { color: 'rgba(0,0,0,0.07)' },
+        ticks: { display: false }
+      }
+    }
+  }
+});
+
+// Pie / Doughnut
+new Chart(document.getElementById('pieChart').getContext('2d'), {
+  type: 'doughnut',
+  data: {
+    labels: ['اشتراكات النظار', 'رسوم الإنشاء', 'نسبة العوائد الاستثمارية', 'العقود الحكومية'],
+    datasets: [{
+      data: [25, 15, 35, 25],
+      backgroundColor: ['#1B6B47', '#C8A96E', '#2D9B6A', '#2B5EA7'],
+      borderColor: '#FAF6EE',
+      borderWidth: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    cutout: '62%',
+    plugins: {
+      legend: { position: 'bottom', labels: { padding: 24, font: { size: 13 } } },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed}%` } }
+    }
+  }
+});
+</script>
+</body>
+</html>
